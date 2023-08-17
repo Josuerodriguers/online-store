@@ -12,5 +12,6 @@
 }
 
 .sectionInput input {
+  box-shadow: 3px 3px 10px rgb(66, 66, 66);
   width: 80%;
 }
