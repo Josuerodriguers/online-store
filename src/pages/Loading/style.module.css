@@ -1,0 +1,10 @@
+.containerLoading {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}
+
+.loading {
+  margin-top: 200px;
+}
+

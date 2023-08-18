@@ -6,13 +6,14 @@ import style from './style.module.css';
 type HomeProps = {
   products: ProductType[] | null;
   handleSubmit: (listProducts: ProductType[]) => void;
+  isLoading: boolean;
 };
 
-export default function Home({ products, handleSubmit }: HomeProps) {
+export default function Home({ products, handleSubmit, isLoading }: HomeProps) {
   return (
     <main className={ style.mainContainer }>
       <CategoriesList handleSubmit={ handleSubmit } />
-      <ProductsList products={ products } />
+      <ProductsList products={ products } isLoading={ isLoading } />
     </main>
   );
 }

@@ -6,9 +6,10 @@ import { getProductsFromCategoryAndQuery } from '../../services/api';
 
 type HeaderProps = {
   handleSubmit: (products: []) => void;
+  handleLoading: (value: boolean) => void;
 };
 
-function Header({ handleSubmit }: HeaderProps) {
+function Header({ handleSubmit, handleLoading }: HeaderProps) {
   const [searchItem, setSearchItem] = useState<string>('');
   const [isCheckedInput, setIsCheckedInput] = useState<boolean>(true);
 
@@ -21,7 +22,9 @@ function Header({ handleSubmit }: HeaderProps) {
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    handleLoading(true);
     const resultData = await getProductsFromCategoryAndQuery('', searchItem);
+    handleLoading(false);
     handleSubmit(resultData.results);
   };
 
