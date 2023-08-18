@@ -1,0 +1,46 @@
+.containerHeader {
+  background-color: #fff159;
+  display: flex;
+  height: 5rem;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.containerHeader section {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.containerMain {
+  border: 1px blue solid;
+  display: flex;
+  height: 80vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.containerProduct {
+  background-color: white;
+  border: 1px red solid;
+  display: flex;
+  width: 50%;
+}
+
+.containerImg {
+  align-items: center;
+  border: green solid 1px;
+  display: flex;
+  justify-content: center;
+  width: 30rem;
+}
+
+.containerImg img {
+  width: 20rem;
+}
+
+.containerInfo {
+  padding: 4rem;
+  width: 40rem;
+}

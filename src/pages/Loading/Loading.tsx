@@ -1,7 +1,12 @@
-import { ClockLoader } from 'react-spinners';
+import { PacmanLoader } from 'react-spinners';
+import style from './style.module.css';
 
 export default function Loading() {
   return (
-    <ClockLoader />
+    <section className={ style.containerLoading }>
+      <section className={ style.loading }>
+        <PacmanLoader size="150px" color="#FFF159" />
+      </section>
+    </section>
   );
 }

@@ -9,3 +9,14 @@ export type ProductType = {
   thumbnail: string;
   price: string;
 };
+
+type ObjectType = {
+  id: string;
+  url: string;
+  secure_url: string;
+  size: string;
+  max_size: string;
+  quality: string
+};
+
+export type ProductTypeWithPicture = ProductType & { pictures: ObjectType[] };
