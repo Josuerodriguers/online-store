@@ -1,0 +1,12 @@
+.sectionContainer {
+  padding: 0.5rem;
+  width: 17rem;
+}
+
+.sectionContainer h3 {
+  text-align: center;
+}
+
+.categoryCard {
+  padding: 16px;
+}

@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import cart from '../../assets/images/cart.png';
-import style from './header.module.css';
+import { BsCart3 } from 'react-icons/bs';
+import style from './style.module.css';
+import { getProductsFromCategoryAndQuery } from '../../services/api';
 
-function Header() {
+type HeaderProps = {
+  handleSubmit: (products: []) => void;
+};
+
+function Header({ handleSubmit }: HeaderProps) {
   const [searchItem, setSearchItem] = useState<string>('');
   const [isCheckedInput, setIsCheckedInput] = useState<boolean>(true);
 
@@ -14,18 +19,28 @@ function Header() {
 
   const checkedInput = (value: string) => !value.length;
 
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const resultData = await getProductsFromCategoryAndQuery('', searchItem);
+    handleSubmit(resultData.results);
+  };
+
   return (
     <header className={ style.header }>
       <section className={ style.sectionInput }>
-        <input
-          type="text"
-          placeholder="Digite o nome do produto"
-          value={ searchItem }
-          onChange={ (event) => handleChange(event) }
-        />
+        <form className={ style.containerForm } onSubmit={ submit }>
+          <input
+            type="text"
+            placeholder="Digite o nome do produto"
+            value={ searchItem }
+            onChange={ (event) => handleChange(event) }
+            data-testid="query-input"
+          />
+          <button data-testid="query-button" type="submit">Buscar</button>
+        </form>
 
         <Link to="/cart" data-testid="shopping-cart-button">
-          <img src={ cart } alt="link do carrinho de compras" width="35px" />
+          <BsCart3 size="1.6rem" />
         </Link>
       </section>
 

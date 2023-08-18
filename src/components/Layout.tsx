@@ -1,10 +1,15 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header/Header';
+import { ProductType } from '../type';
 
-export default function Layout() {
+type LayoutProps = {
+  handleSubmit: (listProducts: ProductType[]) => void
+};
+
+export default function Layout({ handleSubmit }: LayoutProps) {
   return (
     <>
-      <Header />
+      <Header handleSubmit={ handleSubmit } />
       <Outlet />
     </>
   );
