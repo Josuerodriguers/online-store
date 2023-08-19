@@ -4,15 +4,28 @@ import style from './styles.module.css';
 
 type ShoppingCartProps = {
   cartProducts: ProductTypeWithQuantity[];
+  handleDelete: (id: string) => void;
+  addItemCart: (id: string) => void;
+  removeItemCart: (id: string) => void;
 };
 
-export default function ShoppingCart({ cartProducts }: ShoppingCartProps) {
+export default function ShoppingCart({
+  cartProducts,
+  handleDelete,
+  addItemCart,
+  removeItemCart }: ShoppingCartProps) {
   return (
     <main className={ style.containerMain }>
       {cartProducts.length ? (
         <section className={ style.containerProducts }>
           {cartProducts.map((product) => (
-            <CartList key={ product.id } product={ product } />
+            <CartList
+              key={ product.id }
+              product={ product }
+              handleDelete={ handleDelete }
+              addItemCart={ addItemCart }
+              removeItemCart={ removeItemCart }
+            />
           ))}
         </section>
       ) : (

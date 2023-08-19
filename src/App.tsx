@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Home from './pages/Home/Home';
 import Layout from './components/Layout';
 import ShoppingCart from './pages/ShoppingCart/ShoppingCart';
@@ -26,18 +26,66 @@ export default function App() {
     localStorage.setItem('cartList', JSON.stringify(cartList));
   };
 
+  const getLocalStorage = (key: string) => {
+    const result = JSON.parse(localStorage.getItem(key) as string);
+    return result;
+  };
+
   const handleAddCart = (product: ProductType): void => {
     const productFind = findProduct(product);
     if (productFind) {
-      console.log('entrei');
       const addQuantity = { ...productFind, quantity: productFind.quantity += 1 };
       const removeItem = cartProducts.filter(({ id }) => id !== product.id);
-      setCartProducts([...removeItem, addQuantity]);
+      const newCartProducts = [...removeItem, addQuantity];
+      setCartProducts(newCartProducts);
     } else {
-      setCartProducts([...cartProducts, { ...product, quantity: 1 }]);
+      const newCartProducts = [...cartProducts, { ...product, quantity: 1 }];
+      setCartProducts(newCartProducts);
+      setLocalStorage(newCartProducts);
     }
-    setLocalStorage(cartProducts);
   };
+
+  const handleDelete = (id: string) => {
+    const cartRemoveItem = cartProducts.filter((product) => product.id !== id);
+    setCartProducts(cartRemoveItem);
+    setLocalStorage(cartRemoveItem);
+  };
+
+  const addItemCart = (id: string) => {
+    // const productFind = findProduct(product);
+    // if (productFind) {
+    //   const addQuantity = { ...productFind, quantity: productFind.quantity += 1 };
+    //   const removeItem = cartProducts.filter(({ id }) => id !== product.id);
+    //   const newCartProducts = [...removeItem, addQuantity];
+    //   setCartProducts(newCartProducts);
+    //   setLocalStorage(newCartProducts);
+    // }
+    const indexItem = cartProducts.findIndex((product) => product.id === id);
+    const newCartProducts = cartProducts;
+    newCartProducts[indexItem].quantity += 1;
+    setCartProducts([...newCartProducts]);
+    setLocalStorage([...newCartProducts]);
+  };
+
+  const removeItemCart = (id: string) => {
+    const indexItem = cartProducts.findIndex((product) => product.id === id);
+    if (cartProducts[indexItem].quantity > 1) {
+      const newCartProducts = cartProducts;
+      newCartProducts[indexItem].quantity -= 1;
+      setCartProducts([...newCartProducts]);
+      setLocalStorage([...newCartProducts]);
+    }
+  };
+
+  useEffect(() => {
+    const getCartLocalStorage = () => {
+      const resultData = getLocalStorage('cartList');
+      if (resultData) {
+        setCartProducts(resultData);
+      }
+    };
+    getCartLocalStorage();
+  }, []);
 
   return (
     <Routes>
@@ -66,6 +114,9 @@ export default function App() {
           path="/cart"
           element={
             <ShoppingCart
+              handleDelete={ handleDelete }
+              addItemCart={ addItemCart }
+              removeItemCart={ removeItemCart }
               cartProducts={ cartProducts }
             />
           }
