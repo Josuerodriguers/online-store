@@ -1,0 +1,15 @@
+.productCard {
+  align-items: center;
+  border: 1px solid rgb(241, 237, 237);
+  display: flex;
+  justify-content: space-between;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  width: 55rem;
+}
+
+.productInfo {
+  align-items: center;
+  display: flex;
+  gap: 2rem;
+}

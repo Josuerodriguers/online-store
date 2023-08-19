@@ -1,6 +1,6 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BsCart3 } from 'react-icons/bs';
+import { BsCart3, BsSearch } from 'react-icons/bs';
 import style from './style.module.css';
 import { getProductsFromCategoryAndQuery } from '../../services/api';
 
@@ -20,7 +20,7 @@ function Header({ handleSubmit, handleLoading }: HeaderProps) {
 
   const checkedInput = (value: string) => !value.length;
 
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     handleLoading(true);
     const resultData = await getProductsFromCategoryAndQuery('', searchItem);
@@ -31,7 +31,7 @@ function Header({ handleSubmit, handleLoading }: HeaderProps) {
   return (
     <header className={ style.header }>
       <section className={ style.sectionInput }>
-        <form className={ style.containerForm } onSubmit={ submit }>
+        <form className={ style.containerForm }>
           <input
             type="text"
             placeholder="Digite o nome do produto"
@@ -39,7 +39,13 @@ function Header({ handleSubmit, handleLoading }: HeaderProps) {
             onChange={ (event) => handleChange(event) }
             data-testid="query-input"
           />
-          <button data-testid="query-button" type="submit">Buscar</button>
+          <button
+            data-testid="query-button"
+            type="submit"
+            onClick={ (event) => submit(event) }
+          >
+            <BsSearch />
+          </button>
         </form>
 
         <Link to="/cart" data-testid="shopping-cart-button">

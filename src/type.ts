@@ -20,3 +20,5 @@ type ObjectType = {
 };
 
 export type ProductTypeWithPicture = ProductType & { pictures: ObjectType[] };
+
+export type ProductTypeWithQuantity = ProductType & { quantity: number };

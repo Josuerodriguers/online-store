@@ -5,6 +5,10 @@
   width: 90%;
 }
 
+.sectionContainer a {
+  text-decoration: none;
+}
+
 .sectionContainer h3 {
   margin-top: 10rem;
 }
@@ -23,6 +27,10 @@
   padding: 0.8rem;
   text-align: center;
   width: 14rem;
+}
+
+.cardProduct h4 {
+  font-size: 1.3rem;
 }
 
 .cardProduct img {
