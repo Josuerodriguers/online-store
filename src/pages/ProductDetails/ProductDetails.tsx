@@ -4,9 +4,13 @@ import { BsCart3 } from 'react-icons/bs';
 import { TfiBackLeft } from 'react-icons/tfi';
 import { getProductById } from '../../services/api';
 import style from './style.module.css';
-import { ProductTypeWithPicture } from '../../type';
+import { ProductType, ProductTypeWithPicture } from '../../type';
 
-export default function ProductDetails() {
+type ProductDetailsProps = {
+  handleAddCart: (product: ProductType) => void;
+};
+
+export default function ProductDetails({ handleAddCart } : ProductDetailsProps) {
   const [product, setProduct] = useState<ProductTypeWithPicture>();
   const { id } = useParams();
 
@@ -54,6 +58,18 @@ export default function ProductDetails() {
                     <h3 data-testid="product-detail-price">
                       { `Preço: R$ ${product.price}` }
                     </h3>
+                    <button
+                      type="button"
+                      data-testid="product-detail-add-to-cart"
+                      onClick={ () => handleAddCart({
+                        id: product.id,
+                        title: product.title,
+                        thumbnail: product.thumbnail,
+                        price: product.price,
+                      }) }
+                    >
+                      Adicionar ao Carrinho
+                    </button>
                   </section>
                 </section>
               </section>

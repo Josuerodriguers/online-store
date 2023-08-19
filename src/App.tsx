@@ -71,7 +71,14 @@ export default function App() {
           }
         />
       </Route>
-      <Route path="/product/:id" element={ <ProductDetails /> } />
+      <Route
+        path="/product/:id"
+        element={
+          <ProductDetails
+            handleAddCart={ handleAddCart }
+          />
+        }
+      />
     </Routes>
   );
 }
