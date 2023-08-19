@@ -1,9 +1,9 @@
 import CartList from '../../components/CartList/CartList';
-import { ProductType } from '../../type';
+import { ProductTypeWithQuantity } from '../../type';
 import style from './styles.module.css';
 
 type ShoppingCartProps = {
-  cartProducts: ProductType[];
+  cartProducts: ProductTypeWithQuantity[];
 };
 
 export default function ShoppingCart({ cartProducts }: ShoppingCartProps) {
