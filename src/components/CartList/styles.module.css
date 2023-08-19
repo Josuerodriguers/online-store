@@ -13,3 +13,10 @@
   display: flex;
   gap: 2rem;
 }
+
+.btnDeleteContainer button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
