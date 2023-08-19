@@ -38,16 +38,24 @@ export default function ProductDetails() {
         <section className={ style.containerProduct }>
           {product && (
             <>
-              <section className={ style.containerImg }>
-                <img
-                  data-testid="product-detail-image"
-                  src={ product.pictures[0].url }
-                  alt={ product.title }
-                />
+              <section className={ style.containerTitle }>
+                <h3 data-testid="product-detail-name">{ product.title }</h3>
               </section>
               <section className={ style.containerInfo }>
-                <h2 data-testid="product-detail-name">{ product.title }</h2>
-                <h2 data-testid="product-detail-price">{ `R$ ${product.price}` }</h2>
+                <section className={ style.containerImg }>
+                  <img
+                    data-testid="product-detail-image"
+                    src={ product.pictures[0].url }
+                    alt={ product.title }
+                  />
+                </section>
+                <section className={ style.containerText }>
+                  <section>
+                    <h3 data-testid="product-detail-price">
+                      { `Preço: R$ ${product.price}` }
+                    </h3>
+                  </section>
+                </section>
               </section>
             </>
           )}

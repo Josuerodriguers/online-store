@@ -5,15 +5,26 @@ import style from './style.module.css';
 
 type HomeProps = {
   products: ProductType[] | null;
-  handleSubmit: (listProducts: ProductType[]) => void;
   isLoading: boolean;
+  handleSubmit: (listProducts: ProductType[]) => void;
+  handleLoading: (value: boolean) => void;
+  handleAddCart: (product: ProductType) => void;
 };
 
-export default function Home({ products, handleSubmit, isLoading }: HomeProps) {
+export default function Home({
+  products,
+  handleSubmit,
+  isLoading,
+  handleLoading,
+  handleAddCart }: HomeProps) {
   return (
     <main className={ style.mainContainer }>
-      <CategoriesList handleSubmit={ handleSubmit } />
-      <ProductsList products={ products } isLoading={ isLoading } />
+      <CategoriesList handleSubmit={ handleSubmit } handleLoading={ handleLoading } />
+      <ProductsList
+        products={ products }
+        isLoading={ isLoading }
+        handleAddCart={ handleAddCart }
+      />
     </main>
   );
 }

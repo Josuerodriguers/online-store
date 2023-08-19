@@ -5,13 +5,16 @@ import { CategoryType, ProductType } from '../../type';
 
 type CategoriesListProps = {
   handleSubmit: (listProducts: ProductType[]) => void;
+  handleLoading: (value: boolean) => void;
 };
 
-function CategoriesList({ handleSubmit }: CategoriesListProps) {
+function CategoriesList({ handleSubmit, handleLoading }: CategoriesListProps) {
   const [categories, setCategories] = useState<CategoryType[]>([]);
 
   const handleClick = async (categoriesId: string) => {
+    handleLoading(true);
     const resultData = await getProductsFromCategoryAndQuery(categoriesId, '');
+    handleLoading(false);
     handleSubmit(resultData.results);
   };
 
