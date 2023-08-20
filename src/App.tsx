@@ -11,6 +11,7 @@ export default function App() {
   const [products, setProducts] = useState<ProductType[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cartProducts, setCartProducts] = useState<ProductTypeWithQuantity[]>([]);
+  const [numberCartItens, setNumberCartItens] = useState(0);
 
   const handleSubmit = (listProducts: ProductType[]): void => {
     setProducts(listProducts);
@@ -40,10 +41,11 @@ export default function App() {
       const removeItem = cartProducts.filter(({ id }) => id !== product.id);
       const newCartProducts = [...removeItem, addQuantity];
       setCartProducts(newCartProducts);
+      setLocalStorage(newCartProducts);
     } else {
       const newCartProducts = [
         ...cartProducts, { ...product, quantity: 1 },
-      ] as ProductTypeWithQuantity[];
+      ];
       setCartProducts(newCartProducts);
       setLocalStorage(newCartProducts);
     }
@@ -86,10 +88,21 @@ export default function App() {
       const resultData = getLocalStorage('cartList');
       if (resultData) {
         setCartProducts(resultData);
+        setNumberCartItens(resultData.length);
       }
     };
     getCartLocalStorage();
   }, []);
+
+  useEffect(() => {
+    const resultData = getLocalStorage('cartList');
+    if (resultData) {
+      setNumberCartItens(resultData
+        .reduce((acc: number, { quantity }: ProductTypeWithQuantity) => {
+          return acc + Number(quantity);
+        }, 0));
+    }
+  }, [cartProducts]);
 
   return (
     <Routes>
@@ -97,6 +110,7 @@ export default function App() {
         path="/"
         element={
           <Layout
+            numberCartItens={ numberCartItens }
             handleSubmit={ handleSubmit }
             handleLoading={ handleLoading }
           />
@@ -131,6 +145,7 @@ export default function App() {
         element={
           <ProductDetails
             handleAddCart={ handleAddCart }
+            numberCartItens={ numberCartItens }
           />
         }
       />

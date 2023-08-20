@@ -8,9 +8,13 @@ import { ProductType, ProductTypeWithPicture } from '../../type';
 
 type ProductDetailsProps = {
   handleAddCart: (product: ProductType) => void;
+  numberCartItens: number;
 };
 
-export default function ProductDetails({ handleAddCart } : ProductDetailsProps) {
+export default function ProductDetails({
+  handleAddCart,
+  numberCartItens,
+} : ProductDetailsProps) {
   const [product, setProduct] = useState<ProductTypeWithPicture>();
   const { id } = useParams();
 
@@ -35,6 +39,7 @@ export default function ProductDetails({ handleAddCart } : ProductDetailsProps) 
           </button>
           <Link to="/cart" data-testid="shopping-cart-button">
             <BsCart3 size="1.6rem" />
+            <span data-testid="shopping-cart-size">{numberCartItens}</span>
           </Link>
         </section>
       </header>
@@ -66,6 +71,8 @@ export default function ProductDetails({ handleAddCart } : ProductDetailsProps) 
                         title: product.title,
                         thumbnail: product.thumbnail,
                         price: product.price,
+                        shipping: product.shipping,
+                        available_quantity: product.available_quantity,
                       }) }
                     >
                       Adicionar ao Carrinho

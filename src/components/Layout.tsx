@@ -5,12 +5,21 @@ import { ProductType } from '../type';
 type LayoutProps = {
   handleSubmit: (listProducts: ProductType[]) => void;
   handleLoading: (value: boolean) => void;
+  numberCartItens: number;
 };
 
-export default function Layout({ handleSubmit, handleLoading }: LayoutProps) {
+export default function Layout({
+  handleSubmit,
+  handleLoading,
+  numberCartItens,
+}: LayoutProps) {
   return (
     <>
-      <Header handleSubmit={ handleSubmit } handleLoading={ handleLoading } />
+      <Header
+        numberCartItens={ numberCartItens }
+        handleSubmit={ handleSubmit }
+        handleLoading={ handleLoading }
+      />
       <Outlet />
     </>
   );
