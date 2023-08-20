@@ -1,0 +1,42 @@
+.containerHeader {
+  align-items: center;
+  background-color: #fff159;
+  display: flex;
+  height: 5rem;
+  justify-content: center;
+}
+
+.containerHeader section {
+  width: 80%;
+}
+
+.containerCartList {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.productCard {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  height: 6rem;
+  justify-content: space-between;
+}
+
+.containerInfo {
+  border: 1px rgb(224, 216, 216) solid;
+  display: flex;
+  height: 6rem;
+  width: 70%;
+}
+
+.containerSale {
+  align-items: center;
+  border: 1px rgb(224, 216, 216) solid;
+  display: flex;
+  height: 6rem;
+  justify-content: space-around;
+  width: 30%;
+}

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import CartList from '../../components/CartList/CartList';
 import { ProductTypeWithQuantity } from '../../type';
 import style from './styles.module.css';
@@ -14,6 +15,8 @@ export default function ShoppingCart({
   handleDelete,
   addItemCart,
   removeItemCart }: ShoppingCartProps) {
+  const navigate = useNavigate();
+
   return (
     <main className={ style.containerMain }>
       {cartProducts.length ? (
@@ -27,6 +30,13 @@ export default function ShoppingCart({
               removeItemCart={ removeItemCart }
             />
           ))}
+          <button
+            data-testid="checkout-products"
+            type="button"
+            onClick={ () => navigate('/checkout') }
+          >
+            Finalizar compra
+          </button>
         </section>
       ) : (
         <section className={ style.containerProducts }>
