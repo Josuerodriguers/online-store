@@ -8,6 +8,8 @@ export type ProductType = {
   title: string;
   thumbnail: string;
   price: string;
+  shipping: { free_shipping: boolean };
+  available_quantity: number;
 };
 
 type ObjectType = {
@@ -21,6 +23,4 @@ type ObjectType = {
 
 export type ProductTypeWithPicture = ProductType & { pictures: ObjectType[] };
 
-export type ProductTypeWithShipping = ProductType & {
-  shipping: { free_shipping: boolean }
-};
+export type ProductTypeWithQuantity = ProductType & { quantity: number };

@@ -33,6 +33,7 @@ export default function App() {
   };
 
   const handleAddCart = (product: ProductType): void => {
+    console.log(product);
     const productFind = findProduct(product);
     if (productFind) {
       const addQuantity = { ...productFind, quantity: productFind.quantity += 1 };
@@ -40,7 +41,9 @@ export default function App() {
       const newCartProducts = [...removeItem, addQuantity];
       setCartProducts(newCartProducts);
     } else {
-      const newCartProducts = [...cartProducts, { ...product, quantity: 1 }];
+      const newCartProducts = [
+        ...cartProducts, { ...product, quantity: 1 },
+      ] as ProductTypeWithQuantity[];
       setCartProducts(newCartProducts);
       setLocalStorage(newCartProducts);
     }
@@ -54,10 +57,14 @@ export default function App() {
 
   const addItemCart = (id: string) => {
     const indexItem = cartProducts.findIndex((product) => product.id === id);
-    const newCartProducts = cartProducts;
-    newCartProducts[indexItem].quantity += 1;
-    setCartProducts([...newCartProducts]);
-    setLocalStorage([...newCartProducts]);
+    if (indexItem !== -1
+      && cartProducts[indexItem].quantity < cartProducts[indexItem].available_quantity
+    ) {
+      const newCartProducts = cartProducts;
+      newCartProducts[indexItem].quantity += 1;
+      setCartProducts([...newCartProducts]);
+      setLocalStorage([...newCartProducts]);
+    }
   };
 
   const removeItemCart = (id: string) => {
