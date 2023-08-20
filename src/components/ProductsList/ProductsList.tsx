@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import Loading from '../../pages/Loading/Loading';
-import { ProductType } from '../../type';
+import { ProductType, ProductTypeWithShipping } from '../../type';
 import style from './style.module.css';
 
 type ProductsListProps = {
-  products: ProductType[] | null;
+  products: ProductTypeWithShipping[] | null;
   isLoading: boolean;
   handleAddCart: (product: ProductType) => void;
 };
@@ -19,7 +19,7 @@ export default function ProductsList({
     <section className={ style.sectionContainer }>
       {products !== null && (
         products.length ? (
-          products.map(({ id, title, thumbnail, price }) => (
+          products.map(({ id, title, thumbnail, price, shipping: { free_shipping } }) => (
             <section className={ style.cardProduct } key={ id }>
               <Link
                 to={ `product/${id}` }
@@ -29,6 +29,7 @@ export default function ProductsList({
                 <section data-testid="product">
                   <img src={ thumbnail } alt="" />
                   <h4>{`R$ ${price}`}</h4>
+                  {free_shipping && <p data-testid="free-shipping">frete grátis</p>}
                   <p>{title}</p>
                 </section>
               </Link>
