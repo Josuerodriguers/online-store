@@ -1,0 +1,66 @@
+.container {
+  background-color: white;
+  height: 12rem;
+  margin: 10px auto;
+  width: 80%;
+}
+
+.containerTitleData {
+  align-items: center;
+  display: flex;
+  height: 3rem;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.containerTitleData h2 {
+  margin-left: 1rem;
+}
+
+.containerForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoData {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 0 1rem;
+  width: 100%;
+}
+
+.form input {
+  height: 1.3rem;
+  margin: 0.5rem;
+  width: 15rem;
+}
+
+.form select {
+  align-self: center;
+  height: 1.3rem;
+  margin: 0.5rem;
+  width: 8rem;
+}
+
+.containerPayment {
+  display: inline;
+  flex-direction: column;
+  text-align: center;
+}
+
+.PaymentInfo {
+  align-items: baseline;
+  display: flex;
+  justify-content: baseline;
+}
+
+.PaymentInfo label {
+  text-align: center;
+}

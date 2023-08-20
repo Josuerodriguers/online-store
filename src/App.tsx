@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import ShoppingCart from './pages/ShoppingCart/ShoppingCart';
 import { ProductType, ProductTypeWithQuantity } from './type';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
+import Checkout from './pages/Checkout/Checkout';
 
 export default function App() {
   const [products, setProducts] = useState<ProductType[] | null>(null);
@@ -52,14 +53,6 @@ export default function App() {
   };
 
   const addItemCart = (id: string) => {
-    // const productFind = findProduct(product);
-    // if (productFind) {
-    //   const addQuantity = { ...productFind, quantity: productFind.quantity += 1 };
-    //   const removeItem = cartProducts.filter(({ id }) => id !== product.id);
-    //   const newCartProducts = [...removeItem, addQuantity];
-    //   setCartProducts(newCartProducts);
-    //   setLocalStorage(newCartProducts);
-    // }
     const indexItem = cartProducts.findIndex((product) => product.id === id);
     const newCartProducts = cartProducts;
     newCartProducts[indexItem].quantity += 1;
@@ -75,6 +68,10 @@ export default function App() {
       setCartProducts([...newCartProducts]);
       setLocalStorage([...newCartProducts]);
     }
+  };
+
+  const clearCart = () => {
+    setCartProducts([]);
   };
 
   useEffect(() => {
@@ -128,6 +125,12 @@ export default function App() {
           <ProductDetails
             handleAddCart={ handleAddCart }
           />
+        }
+      />
+      <Route
+        path="/checkout"
+        element={
+          <Checkout clearCart={ clearCart } />
         }
       />
     </Routes>
