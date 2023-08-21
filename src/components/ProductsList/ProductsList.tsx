@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import Loading from '../../pages/Loading/Loading';
-import { ProductType, ProductTypeWithShipping } from '../../type';
+import { ProductType } from '../../type';
 import style from './style.module.css';
 
 type ProductsListProps = {
-  products: ProductTypeWithShipping[] | null;
+  products: ProductType[] | null;
   isLoading: boolean;
   handleAddCart: (product: ProductType) => void;
 };
@@ -19,7 +19,14 @@ export default function ProductsList({
     <section className={ style.sectionContainer }>
       {products !== null && (
         products.length ? (
-          products.map(({ id, title, thumbnail, price, shipping: { free_shipping } }) => (
+          products.map(({
+            id,
+            title,
+            thumbnail,
+            price,
+            shipping,
+            available_quantity,
+          }) => (
             <section className={ style.cardProduct } key={ id }>
               <Link
                 to={ `product/${id}` }
@@ -29,14 +36,24 @@ export default function ProductsList({
                 <section data-testid="product">
                   <img src={ thumbnail } alt="" />
                   <h4>{`R$ ${price}`}</h4>
-                  {free_shipping && <p data-testid="free-shipping">frete grátis</p>}
+                  {shipping.free_shipping
+                  && (
+                    <p data-testid="free-shipping">frete grátis</p>
+                  )}
                   <p>{title}</p>
                 </section>
               </Link>
               <button
                 type="button"
                 data-testid="product-add-to-cart"
-                onClick={ () => handleAddCart({ id, title, thumbnail, price }) }
+                onClick={ () => handleAddCart({
+                  id,
+                  title,
+                  thumbnail,
+                  price,
+                  shipping,
+                  available_quantity,
+                }) }
               >
                 Adicionar ao Carrinho
               </button>
