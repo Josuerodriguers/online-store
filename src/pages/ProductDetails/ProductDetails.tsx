@@ -4,7 +4,9 @@ import { BsCart3 } from 'react-icons/bs';
 import { TfiBackLeft } from 'react-icons/tfi';
 import { getProductById } from '../../services/api';
 import style from './style.module.css';
-import { ProductType, ProductTypeWithPicture } from '../../type';
+import { ProductType, ProductTypeWithPicture, ReviewType } from '../../type';
+import FormEvaluator from '../../components/FormEvaluator/FormEvaluator';
+import ListReviews from '../../components/ListReviews/ListReviews';
 
 type ProductDetailsProps = {
   handleAddCart: (product: ProductType) => void;
@@ -16,17 +18,26 @@ export default function ProductDetails({
   numberCartItens,
 } : ProductDetailsProps) {
   const [product, setProduct] = useState<ProductTypeWithPicture>();
+  const [reviews, setReviews] = useState<ReviewType[]>([]);
   const { id } = useParams();
 
   useEffect(() => {
     const getDataProduct = async () => {
-      if (typeof id === 'string') {
-        const resultData = await getProductById(id);
-        setProduct(resultData);
+      if (id) {
+        const resultProduct = await getProductById(id);
+        setProduct(resultProduct);
+        const resultReviews = JSON.parse(localStorage.getItem(id) as string);
+        if (resultReviews) {
+          setReviews(resultReviews);
+        }
       }
     };
     getDataProduct();
   }, [id]);
+
+  const updateReviews = (review: ReviewType) => {
+    setReviews([...reviews, review]);
+  };
 
   return (
     <>
@@ -82,6 +93,12 @@ export default function ProductDetails({
               </section>
             </>
           )}
+        </section>
+        <section className={ style.containerForm }>
+          <FormEvaluator id={ id as string } updateReviews={ updateReviews } />
+        </section>
+        <section>
+          <ListReviews reviews={ reviews } />
         </section>
       </main>
     </>

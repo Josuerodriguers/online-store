@@ -15,10 +15,35 @@
 }
 
 .containerMain {
+  align-items: center;
+  border: 1px green solid;
   display: flex;
+  flex-direction: column;
   height: 80vh;
-  justify-content: center;
   width: 100%;
+}
+
+.containerForm {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  height: 40vh;
+  justify-content: center;
+  margin-top: 10px;
+  width: 80%;
+}
+
+.containerForm form {
+  align-items: flex-end;
+  display: flex;
+}
+
+.containerForm label {
+  margin-left: 30px;
+}
+
+.containerForm button {
+  margin-left: 20px;
 }
 
 .containerTitle {

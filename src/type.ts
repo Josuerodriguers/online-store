@@ -12,6 +12,12 @@ export type ProductType = {
   available_quantity: number;
 };
 
+export type ReviewType = {
+  email: string;
+  rating: string;
+  message: string;
+};
+
 type ObjectType = {
   id: string;
   url: string;
