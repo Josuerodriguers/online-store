@@ -7,9 +7,10 @@ import { getProductsFromCategoryAndQuery } from '../../services/api';
 type HeaderProps = {
   handleSubmit: (products: []) => void;
   handleLoading: (value: boolean) => void;
+  numberCartItens: number;
 };
 
-function Header({ handleSubmit, handleLoading }: HeaderProps) {
+function Header({ handleSubmit, handleLoading, numberCartItens }: HeaderProps) {
   const [searchItem, setSearchItem] = useState<string>('');
   const [isCheckedInput, setIsCheckedInput] = useState<boolean>(true);
 
@@ -50,6 +51,7 @@ function Header({ handleSubmit, handleLoading }: HeaderProps) {
 
         <Link to="/cart" data-testid="shopping-cart-button">
           <BsCart3 size="1.6rem" />
+          <span data-testid="shopping-cart-size">{numberCartItens}</span>
         </Link>
       </section>
 
